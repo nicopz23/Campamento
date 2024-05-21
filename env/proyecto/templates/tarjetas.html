@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjetas de Alumnos</title>
+    <style>
+      .tarjeta {
+            border: 1px solid #000;
+            padding: 10px; /* Reducir el padding */
+            margin: 10px; /* Reducir el margen */
+            display: inline-block;
+            text-align: center;
+            width: calc(33.33% - 20px); /* Ancho del 33.33% de la pantalla, menos el padding y el margen */
+            max-width: 200px; /* Ancho máximo del div */
+            height: auto; /* Altura automática */
+        }
+        .codigo-qr img {
+            max-width: 100%; /* Ajustar el tamaño de la imagen para que quepa dentro del div */
+            height: auto; /* Altura automática */
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tarjetas de Alumnos</h1>
+    <div class="tarjetas-container">
+        {% for id_alumno, alumno in alumnos.items() %}
+        <div class="tarjeta">
+            <h2>{{ alumno['Nombre'] }} {{ alumno['Apellidos'] }}</h2>
+            <div class="codigo-qr">
+                <img src="{{ url_for('qr_code', filename=id_alumno|string + '.png') }}" alt="Código QR del Alumno">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Consultar Saldo{% endblock %}
+
+{% block content %}
+<h2>Saldo del Alumno: {{ alumno.Nombre }} {{ alumno.Apellido }}</h2>
+<p>Saldo Actual: {{ alumno.Saldo }}</p>
+
+{% if mensaje %}
+<p>{{ mensaje }}</p>
+{% endif %}
+
+<div id="password-container">
+    <label for="password">Contraseña de Monitor:</label>
+    <input type="password" id="password" name="password">
+    <button type="button" onclick="verificarContraseña()">Enviar</button>
+</div>
+
+<div id="formulario-container" style="display: none;">
+
+    <form method="POST" id="formulario">
+        <label for="monto">Monto a modificar:</label>
+        <input type="number" name="monto" step="0.01" required>
+
+        <label for="operacion">Operación:</label>
+        <select name="operacion">
+            <option value="sumar">Sumar</option>
+            <option value="restar">Restar</option>
+        </select>
+
+        <button type="submit">Actualizar Saldo</button>
+    </form>
+
+</div>
+<script>
+    function verificarContraseña() {
+        var contraseña = document.getElementById("password").value;
+
+        if (contraseña === "monitor1234") {
+            document.getElementById("formulario-container").style.display = "block";
+            document.getElementById("password-container").style.display = "none";
+        } else {
+            alert("Contraseña incorrecta. Por favor, intenta de nuevo.");
+        }
+    }
+</script>
+{% endblock %}
